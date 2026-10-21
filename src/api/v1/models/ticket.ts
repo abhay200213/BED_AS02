@@ -17,3 +17,9 @@ export interface Ticket {
     status: TicketStatus;
     createdAt: string;
 }
+
+export interface CreateTicketInput {
+    title: string;
+    description: string;
+    priority: TicketPriority;
+}
