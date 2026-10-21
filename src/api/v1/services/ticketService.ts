@@ -1,4 +1,9 @@
-import type { Ticket, CreateTicketInput } from "../models/ticket";
+import type { 
+    Ticket,
+    CreateTicketInput,
+    UpdateTicketInput,
+} from "../models/ticket";
+
 import { tickets } from "../../../data/tickets";
 
 // Retrieve all support tickets
@@ -33,4 +38,34 @@ export function createTicket(input: CreateTicketInput): Ticket {
     tickets.push(newTicket);
 
     return newTicket;
+}
+
+// Update an existing support ticket
+export function updateTicket(
+    id: number,
+    updates: UpdateTicketInput
+): Ticket | undefined {
+    const ticket: Ticket | undefined = getTicketById(id);
+
+    if (!ticket) {
+        return undefined;
+    }
+
+    if (updates.title !== undefined) {
+        ticket.title = updates.title;
+    }
+
+    if (updates.description !== undefined) {
+        ticket.description = updates.description;
+    }
+
+    if (updates.priority !== undefined) {
+        ticket.priority = updates.priority;
+    }
+
+    if (updates.status !== undefined) {
+        ticket.status = updates.status;
+    }
+
+    return ticket;
 }

@@ -4,6 +4,7 @@ import {
     getTicketsController,
     getTicketByIdController,
     createTicketController,
+    updateTicketController,
 } from "../controllers/ticketController";
 
 const ticketRouter: Router = Router();
@@ -16,5 +17,8 @@ ticketRouter.get("/:id", getTicketByIdController);
 
 // Create ticket
 ticketRouter.post("/", createTicketController);
+
+// Update an existing ticket
+ticketRouter.put("/:id", updateTicketController);
 
 export default ticketRouter;
