@@ -9,7 +9,7 @@ export default tseslint.config(
             "**coverage/*",
             "**.github/*",
             "eslint.config.mjs",
-            "jest.config.ts",
+            "jest.config.cjs",
         ],
     },
     eslint.configs.recommended,
@@ -48,6 +48,23 @@ export default tseslint.config(
             // Allow ES6 imports with CommonJS output
             "@typescript-eslint/no-require-imports": "off",
             "@typescript-eslint/no-var-requires": "off",
+        },
+    },
+    {
+        // Recognize Jest globals in test files
+        files: ["test/**/*.test.ts"],
+        languageOptions: {
+            globals: {
+                describe: "readonly",
+                it: "readonly",
+                test: "readonly",
+                expect: "readonly",
+                beforeEach: "readonly",
+                afterEach: "readonly",
+                beforeAll: "readonly",
+                afterAll: "readonly",
+                jest: "readonly",
+            },
         },
     }
 );
