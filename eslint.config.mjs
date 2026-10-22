@@ -49,5 +49,22 @@ export default tseslint.config(
             "@typescript-eslint/no-require-imports": "off",
             "@typescript-eslint/no-var-requires": "off",
         },
+    },
+    {
+        // Recognize Jest globals in test files
+        files: ["test/**/*.test.ts"],
+        languageOptions: {
+            globals: {
+                describe: "readonly",
+                it: "readonly",
+                test: "readonly",
+                expect: "readonly",
+                beforeEach: "readonly",
+                afterEach: "readonly",
+                beforeAll: "readonly",
+                afterAll: "readonly",
+                jest: "readonly",
+            },
+        },
     }
 );

@@ -51,7 +51,7 @@ export function calculateTicketUrgency(
     // Resolved tickets have minimal urgency
     if (ticket.status === "resolved") {
         urgencyScore = 0;
-        urgencyLevel = "Minimal. Ticket Resolved.";
+        urgencyLevel = "Minimal. Ticket resolved.";
     } else {
         const baseScore: number = BASE_SCORES[ticket.priority];
 
