@@ -69,3 +69,18 @@ export function updateTicket(
 
     return ticket;
 }
+
+// Delete a support ticket by ID
+export function deleteTicket(id: number): Ticket | undefined {
+    const index: number = tickets.findIndex(
+        (ticket: Ticket): boolean => ticket.id === id
+    );
+
+    if (index === -1) {
+        return undefined;
+    }
+
+    const deletedTicket: Ticket | undefined = tickets.splice(index, 1)[0];
+
+    return deletedTicket;
+}

@@ -13,6 +13,7 @@ import {
     getTicketById,
     createTicket,
     updateTicket,
+    deleteTicket,
 } from "../services/ticketService";
 
 // GET /api/v1/tickets
@@ -227,5 +228,27 @@ export function updateTicketController(
     res.status(HttpStatus.OK).json({
         message: "Ticket updated successfully",
         data: updatedTicket,
+    });
+}
+
+// DELETE /api/v1/tickets/:id
+export function deleteTicketController(
+    req: Request,
+    res: Response
+): void {
+    const id: number = Number(req.params.id);
+
+    const deletedTicket: Ticket | undefined = deleteTicket(id);
+
+    if (!deletedTicket) {
+        res.status(HttpStatus.NOT_FOUND).json({
+            message: "Ticket not found",
+        });
+        return;
+    }
+
+    res.status(HttpStatus.OK).json({
+        message: "Ticket deleted successfully",
+        data: deletedTicket,
     });
 }
