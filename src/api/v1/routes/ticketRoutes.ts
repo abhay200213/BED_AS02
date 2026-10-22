@@ -6,6 +6,7 @@ import {
     createTicketController,
     updateTicketController,
     deleteTicketController,
+    getTicketUrgencyController,
 } from "../controllers/ticketController";
 
 const ticketRouter: Router = Router();
@@ -24,5 +25,8 @@ ticketRouter.put("/:id", updateTicketController);
 
 // Delete an existing ticket
 ticketRouter.delete("/:id", deleteTicketController);
+
+// Calculate ticket urgency
+ticketRouter.get("/:id/urgency", getTicketUrgencyController);
 
 export default ticketRouter;

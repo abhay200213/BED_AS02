@@ -16,6 +16,14 @@ import {
     deleteTicket,
 } from "../services/ticketService";
 
+import {
+    calculateTicketUrgency,
+} from "../services/ticketUrgencyService";
+
+import type {
+    TicketUrgency,
+} from "../services/ticketUrgencyService";
+
 // GET /api/v1/tickets
 export function getTicketsController(
     _req: Request,
@@ -250,5 +258,32 @@ export function deleteTicketController(
     res.status(HttpStatus.OK).json({
         message: "Ticket deleted successfully",
         data: deletedTicket,
+    });
+}
+
+// GET /api/v1/tickets/:id/urgency
+export function getTicketUrgencyController(
+    req: Request,
+    res: Response
+): void {
+    const id: number = Number(req.params.id);
+
+    // Retrieve the requested ticket
+    const ticket: Ticket | undefined = getTicketById(id);
+
+    // Handle nonexistent tickets
+    if (!ticket) {
+        res.status(HttpStatus.NOT_FOUND).json({
+            message: "Ticket not found",
+        });
+        return;
+    }
+
+    // Calculate urgency using the service
+    const urgency: TicketUrgency = calculateTicketUrgency(ticket);
+
+    res.status(HttpStatus.OK).json({
+        message: "Ticket urgency calculated",
+        data: urgency,
     });
 }
